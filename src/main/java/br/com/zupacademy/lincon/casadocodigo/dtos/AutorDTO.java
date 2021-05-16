@@ -1,6 +1,7 @@
 package br.com.zupacademy.lincon.casadocodigo.dtos;
 
 import br.com.zupacademy.lincon.casadocodigo.entities.Autor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -10,11 +11,11 @@ import java.time.Instant;
 public class AutorDTO {
     @NotBlank()
     private String nome;
+    @Size(max = 400)
+    private String descricao;
     @NotBlank
     @Email
     private String email;
-    @Size(max = 400)
-    private String descricao;
     private Instant timestamp;
 
     public AutorDTO(@NotBlank String nome,

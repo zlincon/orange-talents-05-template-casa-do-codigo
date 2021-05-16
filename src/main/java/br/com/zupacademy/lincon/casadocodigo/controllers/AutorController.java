@@ -2,6 +2,7 @@ package br.com.zupacademy.lincon.casadocodigo.controllers;
 
 import br.com.zupacademy.lincon.casadocodigo.dtos.AutorDTO;
 import br.com.zupacademy.lincon.casadocodigo.entities.Autor;
+import br.com.zupacademy.lincon.casadocodigo.exceptionhandlers.EmailAlreadyExistsException;
 import br.com.zupacademy.lincon.casadocodigo.repositories.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -34,7 +36,12 @@ public class AutorController {
     @PostMapping
     public ResponseEntity<AutorDTO> save(@RequestBody @Valid AutorDTO autorDTO) {
         Autor autor = autorDTO.toModel();
-        Autor autor1 = autorRepository.save(autor);
-        return ResponseEntity.ok(autor1.toDTO());
+        Optional<Autor> autor1 = autorRepository.findByEmail(autorDTO.getEmail());
+        if (autor1.isPresent()){
+            throw  new EmailAlreadyExistsException("Email já existe em nossa base de dados");
+        }
+        System.out.println(autor1.toString());
+        Autor autor2 = autorRepository.save(autor);
+        return ResponseEntity.ok(autor2.toDTO());
     }
 }
