@@ -4,68 +4,45 @@ import br.com.zupacademy.lincon.casadocodigo.entities.Autor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 
 public class AutorDTO {
-    private Long id;
-    @NotNull @NotBlank
+    @NotBlank()
     private String nome;
-    @NotNull
+    @NotBlank
     @Email
     private String email;
+    @Size(max = 400)
     private String descricao;
-    @NotNull
     private Instant timestamp;
 
-    public AutorDTO() {
+    public AutorDTO(@NotBlank String nome,
+                    @NotBlank@Email String email,
+                    @Size(max = 400) String descricao, Instant timestamp) {
+        this.nome = nome;
+        this.email = email;
+        this.descricao = descricao;
+        this.timestamp = timestamp;
     }
 
-    public AutorDTO(Autor autor) {
-        this.id = autor.getId();
-        this.nome = autor.getNome();
-        this.email = autor.getEmail();
-        this.descricao = autor.getDescricao();
-        this.timestamp = autor.getTimestamp();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Autor toModel() {
+        return new Autor(this.nome, this.email, this.descricao);
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public Instant getTimestamp() {
         return timestamp;
-    }
-
-    public void setTimestamp(Instant timestamp) {
-        this.timestamp = timestamp;
     }
 }

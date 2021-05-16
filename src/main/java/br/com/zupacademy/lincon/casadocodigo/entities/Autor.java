@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.Instant;
 
 @Entity
@@ -17,7 +18,7 @@ public class Autor {
     private String nome;
     private String email;
     private String descricao;
-    private Instant timestamp;
+    private Instant timestamp = Instant.now();
 
     public Autor() {
     }
@@ -26,33 +27,17 @@ public class Autor {
         this.nome = nome;
         this.email = email;
         this.descricao = descricao;
-        this.timestamp = timestamp;
     }
 
-    public Autor(AutorDTO autorDTO) {
-        this.nome = autorDTO.getNome();
-        this.email = autorDTO.getEmail();
-        this.descricao = autorDTO.getDescricao();
-        this.timestamp = Instant.now();
+    public AutorDTO toDTO() {
+        return new AutorDTO(this.nome, this.email, this.descricao, this.timestamp);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public Instant getTimestamp() {
-        return timestamp;
+    @Override
+    public String toString() {
+        return "Autor{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }
