@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/autors")
+@RequestMapping("/api/v1/autores")
 @Validated
 public class AutorController {
 

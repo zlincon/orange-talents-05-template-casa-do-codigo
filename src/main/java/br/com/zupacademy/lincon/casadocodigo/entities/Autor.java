@@ -1,16 +1,18 @@
 package br.com.zupacademy.lincon.casadocodigo.entities;
 
-import br.com.zupacademy.lincon.casadocodigo.dtos.AutorDTO;
-
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.Instant;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import br.com.zupacademy.lincon.casadocodigo.dtos.AutorDTO;
+
 @Entity
-@Table(name = "autors")
+@Table(name = "autores")
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,15 +1,15 @@
 package br.com.zupacademy.lincon.casadocodigo.dtos;
 
-import br.com.zupacademy.lincon.casadocodigo.entities.Autor;
-import org.hibernate.validator.constraints.UniqueElements;
+import java.time.Instant;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.time.Instant;
+
+import br.com.zupacademy.lincon.casadocodigo.entities.Autor;
 
 public class AutorDTO {
-    @NotBlank()
+    @NotBlank
     private String nome;
     @Size(max = 400)
     private String descricao;
