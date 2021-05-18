@@ -20,7 +20,11 @@ public class Categoria {
 	@Column(unique = true, nullable = false)
 	@NotBlank
 	private String nome;
-	
+
+	@Deprecated
+	public Categoria() {
+	}
+
 	public Categoria(String nome) {
 		this.nome = nome;
 	}

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import br.com.zupacademy.lincon.casadocodigo.entities.Categoria;
 
+import java.util.Optional;
+
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
+    Optional<Categoria> findByNome(String nome);
 }

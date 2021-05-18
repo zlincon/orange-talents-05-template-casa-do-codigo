@@ -33,6 +33,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
     }
 
+    @ExceptionHandler(NegocioException.class)
+    public ResponseEntity<Object> handleNegocio(NegocioException ex, WebRequest request) {
+        var status = HttpStatus.BAD_REQUEST;
+        var problema = new Problem();
+        problema .setStatus(status.value());
+        problema.setTitulo(ex.getMessage());
+        problema.setDataHora(OffsetDateTime.now());
+
+        return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         var campos = new ArrayList<Problem.Campo>();
