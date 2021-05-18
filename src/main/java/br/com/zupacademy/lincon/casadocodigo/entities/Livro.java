@@ -16,6 +16,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+import br.com.zupacademy.lincon.casadocodigo.dtos.OutputLivroDTO;
 import com.sun.istack.NotNull;
 
 @Entity
@@ -33,7 +34,7 @@ public class Livro {
 	@Column(nullable = false)
 	private BigDecimal preco;
 	@Column(nullable = false)
-	private Integer NumeroPaginas;
+	private Integer numeroPaginas;
 	@Column(nullable = false)
 	private String isbn;
 	private LocalDate dataPublicacao;
@@ -41,18 +42,25 @@ public class Livro {
 	private Categoria categoria;
 	@ManyToOne
 	private Autor autor;
-	
+
+	public Livro() {
+	}
+
 	public Livro(@NotBlank String titulo, @NotBlank @Max(500) String resumo, String sumario,
-			@NotBlank @Min(20) BigDecimal preco, @NotBlank @Min(100) Integer numeroPaginas, @NotBlank String isbn,
-			@Future LocalDate dataPublicacao, @NotNull @Valid Categoria categoria, @NotNull @Valid Autor autor) {
+				 @NotBlank @Min(20) BigDecimal preco, @NotBlank @Min(100) Integer numeroPaginas, @NotBlank String isbn,
+				 @Future LocalDate dataPublicacao, @NotNull @Valid Categoria categoria, @NotNull @Valid Autor autor) {
 		this.titulo = titulo;
 		this.resumo = resumo;
 		this.sumario = sumario;
 		this.preco = preco;
-		this.NumeroPaginas = numeroPaginas;
+		this.numeroPaginas = numeroPaginas;
 		this.isbn = isbn;
 		this.dataPublicacao = dataPublicacao;
 		this.categoria = categoria;
 		this.autor = autor;
 	}
+
+    public OutputLivroDTO toOutputLivrosDTO() {
+		return new OutputLivroDTO(id, titulo);
+    }
 }
