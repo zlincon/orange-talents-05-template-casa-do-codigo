@@ -46,4 +46,14 @@ public class Autor {
                 ", nome='" + nome + '\'' +
                 '}';
     }
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+    
+    
 }

@@ -34,6 +34,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	}
 
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<Object> handleNegocio(NotFoundException ex, WebRequest request) {
+		var status = HttpStatus.NOT_FOUND;
+		var problema = new Problem();
+		problema.setStatus(status.value());
+		problema.setTitulo(ex.getMessage());
+		problema.setDataHora(OffsetDateTime.now());
+
+		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+
+	}
+
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {

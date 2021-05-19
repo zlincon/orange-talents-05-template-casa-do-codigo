@@ -16,13 +16,14 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-import br.com.zupacademy.lincon.casadocodigo.dtos.OutputLivroDTO;
 import com.sun.istack.NotNull;
+
+import br.com.zupacademy.lincon.casadocodigo.dtos.OutputLivroDTO;
 
 @Entity
 @Table(name = "livros")
 public class Livro {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -43,12 +44,13 @@ public class Livro {
 	@ManyToOne
 	private Autor autor;
 
+	@Deprecated
 	public Livro() {
 	}
 
 	public Livro(@NotBlank String titulo, @NotBlank @Max(500) String resumo, String sumario,
-				 @NotBlank @Min(20) BigDecimal preco, @NotBlank @Min(100) Integer numeroPaginas, @NotBlank String isbn,
-				 @Future LocalDate dataPublicacao, @NotNull @Valid Categoria categoria, @NotNull @Valid Autor autor) {
+			@NotBlank @Min(20) BigDecimal preco, @NotBlank @Min(100) Integer numeroPaginas, @NotBlank String isbn,
+			@Future LocalDate dataPublicacao, @NotNull @Valid Categoria categoria, @NotNull @Valid Autor autor) {
 		this.titulo = titulo;
 		this.resumo = resumo;
 		this.sumario = sumario;
@@ -60,7 +62,40 @@ public class Livro {
 		this.autor = autor;
 	}
 
-    public OutputLivroDTO toOutputLivrosDTO() {
+	public OutputLivroDTO toOutputLivrosDTO() {
 		return new OutputLivroDTO(id, titulo);
-    }
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public String getResumo() {
+		return resumo;
+	}
+
+	public String getSumario() {
+		return sumario;
+	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public Integer getNumeroPaginas() {
+		return numeroPaginas;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public LocalDate getDataPublicacao() {
+		return dataPublicacao;
+	}
+
 }
