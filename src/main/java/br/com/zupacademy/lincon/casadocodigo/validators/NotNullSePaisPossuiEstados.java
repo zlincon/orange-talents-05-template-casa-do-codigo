@@ -17,7 +17,6 @@ public class NotNullSePaisPossuiEstados implements Validator {
 	@Autowired
 	public NotNullSePaisPossuiEstados(EntityManager manager) {
 		super();
-		System.out.println("notnullsepais");
 		this.manager = manager;
 	}
 
